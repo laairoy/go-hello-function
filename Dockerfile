@@ -6,7 +6,7 @@ COPY go.mod hello.go go.sum ./
 RUN go build -o /bin/hello
 
 # lean image
-FROM golang:1.20-alpine
+FROM public.ecr.aws/lambda/provided:al2
 
-COPY --from=build /bin/hello /bin/hello
-ENTRYPOINT ["/bin/hello"]
+COPY --from=build /bin/hello /hello
+ENTRYPOINT ["/hello"]
